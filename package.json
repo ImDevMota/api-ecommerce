@@ -1,0 +1,26 @@
+{
+  "name": "api-ecommerce",
+  "version": "1.0.0",
+  "description": "api-ecommerce",
+  "keywords": [
+    ""
+  ],
+  "homepage": "https://github.com/ImDevMota/api-ecommerce#readme",
+  "bugs": {
+    "url": "https://github.com/ImDevMota/api-ecommerce/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ImDevMota/api-ecommerce.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
