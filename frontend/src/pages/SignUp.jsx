@@ -1,19 +1,43 @@
 import iconGoogle from "../assets/icon-google.svg.webp";
+import { useRef } from "react";
+import api from "../../services/api";
 
 export default function SingUp() {
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const confirmPasswordRef = useRef();
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    try {
+      await api.post("/cadastro", {
+        name: nameRef.current.value,
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+        confirmPassword: confirmPasswordRef.current.value,
+      });
+      alert("Usuário Cadastrado com Sucesso!");
+    } catch (err) {
+      alert("Erro ao Cadastrar Usuário");
+    }
+  }
+
   return (
     <section className="flex items-center w-screen h-screen justify-center bg-gray-100 font-poppins">
       <div className="flex flex-col items-center justify-center w-[90%] bg-white rounded-2xl px-[2.7rem] py-[1.3rem] pb-[3.5rem]">
         <h1 className="text-[32px] font-[600]">Sign Up</h1>
 
-        <htmlForm
-          action="submit"
+        <form
+          onSubmit={handleSubmit}
           className="flex flex-col items-center justify-center w-[100%] gap-y-[1rem] mt-[1rem]"
         >
           <div className="flex flex-col w-full relative">
             <input
               type="text"
               name="inputName"
+              ref={nameRef}
               className="border-[2px] peer border-gray-300 rounded-[4px] px-[0.8rem] h-[2.7rem] py-[0.4rem] w-full focus:outline-none focus:border-blue-500"
               placeholder="Name"
               id="inputName"
@@ -32,6 +56,7 @@ export default function SingUp() {
             <input
               type="email"
               name="inputEmail"
+              ref={emailRef}
               className="border-[2px] peer border-gray-300 rounded-[4px] px-[0.8rem] py-[0.4rem] h-[2.7rem] w-full focus:outline-none focus:border-blue-500"
               placeholder="E-mail"
               id="inputEmail"
@@ -50,6 +75,7 @@ export default function SingUp() {
             <input
               type="password"
               name="inputPassword"
+              ref={passwordRef}
               className="border-[2px] peer border-gray-300 rounded-[4px] px-[0.8rem] py-[0.4rem] h-[2.7rem] w-full focus:outline-none focus:border-blue-500"
               placeholder="Password"
               id="inputPassword"
@@ -69,6 +95,7 @@ export default function SingUp() {
             <input
               type="password"
               name="inputConfirmPassword"
+              ref={confirmPasswordRef}
               className="border-[2px] peer border-gray-300 rounded-[4px] px-[0.8rem] py-[0.4rem] h-[2.7rem] w-full focus:outline-none focus:border-blue-500"
               placeholder="Confirm Password"
               id="inputConfirmPassword"
@@ -90,7 +117,7 @@ export default function SingUp() {
           >
             Sign Up
           </button>
-        </htmlForm>
+        </form>
 
         <p className="text-[12px] font-[400] mt-[0.7rem] tracking-[0.75px] text-[black]/50">
           Already have an account?{" "}
