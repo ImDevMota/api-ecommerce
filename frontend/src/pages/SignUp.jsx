@@ -1,8 +1,9 @@
 import iconGoogle from "../assets/icon-google.svg.webp";
 import { useRef } from "react";
 import api from "../../services/api";
+import { Link } from "react-router-dom";
 
-export default function SingUp() {
+export default function SignUp() {
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -121,9 +122,13 @@ export default function SingUp() {
 
         <p className="text-[12px] font-[400] mt-[0.7rem] tracking-[0.75px] text-[black]/50">
           Already have an account?{" "}
-          <a href="#" className="text-blue-500 hover:underline">
+          <Link
+            to={"/login"}
+            href="#"
+            className="text-blue-500 hover:underline"
+          >
             Log In
-          </a>
+          </Link>
         </p>
 
         <div className="flex flex-row w-[97%] items-center justify-between mt-[1.5rem]">

@@ -1,22 +1,26 @@
 import iconGoogle from "../assets/icon-google.svg.webp";
 import { useRef } from "react";
 import api from "../../services/api";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function LogIn() {
+export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const navigate = useNavigate();
 
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
-      const data = await api.post("/login", {
+      const { data: token } = await api.post("/login", {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       });
 
-      console.log(data);
+      localStorage.setItem("token", token);
       alert("Login realizado com Sucesso!");
+
+      navigate("/list-users");
     } catch (err) {
       alert("Senha ou E-mail Incorretos");
     }
@@ -84,9 +88,9 @@ export default function LogIn() {
 
         <p className="text-[12px] font-[400] mt-[0.7rem] tracking-[0.75px] text-[black]/50">
           New User?{" "}
-          <a href="#" className="text-blue-500 hover:underline">
+          <Link to={"/"} href="#" className="text-blue-500 hover:underline">
             Sign up
-          </a>
+          </Link>
         </p>
 
         <div className="flex flex-row w-[97%] items-center justify-between mt-[1.5rem]">

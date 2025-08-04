@@ -5,7 +5,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 const router = express.Router();
 
-router.get("/listar-usuarios", async (req, res) => {
+router.get("/list-users", async (req, res) => {
   try {
     const users = await prisma.user.findMany({ omit: { password: true } });
 
