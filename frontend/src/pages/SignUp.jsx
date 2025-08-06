@@ -1,13 +1,15 @@
 import iconGoogle from "../assets/icon-google.svg.webp";
 import { useRef, useState } from "react";
 import api from "../../services/api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -22,6 +24,8 @@ export default function SignUp() {
         confirmPassword: confirmPasswordRef.current.value,
       });
       alert("Usuário Cadastrado com Sucesso!");
+
+      navigate("/login");
     } catch (err) {
       alert("Erro ao Cadastrar Usuário");
     }
