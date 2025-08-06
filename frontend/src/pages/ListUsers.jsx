@@ -21,9 +21,9 @@ export default function ListUsers() {
   }, []);
 
   return (
-    <div>
+    <div className="">
       <h1 className="text-[32px] font-[600] text-center">List Users:</h1>
-      <ul>
+      <ul className="text-center gap-y-[1rem] mt-[1rem]">
         {/* if length do allUsers for maior que 0 */}
         {allUsers &&
           allUsers.map((user) => (

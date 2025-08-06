@@ -33,7 +33,7 @@ export default function SignUp() {
 
   return (
     <section className="flex items-center w-screen h-screen justify-center bg-gray-100 font-poppins">
-      <div className="flex flex-col items-center justify-center w-[90%] bg-white rounded-2xl px-[2.7rem] py-[1.3rem] pb-[3.5rem]">
+      <div className="flex flex-col items-center justify-center w-[90%] sm:w-[30%] bg-white rounded-2xl px-[2.7rem] sm:px-[5rem] sm:py-[3rem] py-[1.3rem] sm:pb-[4rem] pb-[3.5rem]">
         <h1 className="text-[32px] font-[600]">Sign Up</h1>
 
         <form
