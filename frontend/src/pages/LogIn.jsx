@@ -1,5 +1,5 @@
 import iconGoogle from "../assets/icon-google.svg.webp";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import api from "../../services/api";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -7,6 +7,7 @@ export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -56,7 +57,7 @@ export default function Login() {
 
           <div className="flex flex-col w-full relative">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="inputPassword"
               ref={passwordRef}
               className="border-[2px] peer border-gray-300 rounded-[4px] px-[0.8rem] py-[0.4rem] h-[2.7rem] w-full focus:outline-none focus:border-blue-500"
@@ -66,16 +67,60 @@ export default function Login() {
               required
             />
 
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute inset-y-0 right-0 px-3 flex items-center text-gray-600"
+            >
+              {showPassword ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7
+                 a9.964 9.964 0 012.235-3.592M3 3l18 18"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5
+                 c4.477 0 8.268 2.943 9.542 7
+                 -1.274 4.057-5.065 7-9.542 7
+                 -4.477 0-8.268-2.943-9.542-7z"
+                  />
+                </svg>
+              )}
+            </button>
+
             <label
               className="absolute left-3 top-[-10px] px-1 bg-white text-blue-500 font-[600] text-sm opacity-0 peer-focus:opacity-100 transition"
               htmlFor="inputPassword"
             >
               Password
             </label>
-
-            <a className="text-[12px] font-[400] mt-[0.7rem] tracking-[0.75px] hover:underline text-blue-500">
-              Forgot password?{" "}
-            </a>
           </div>
 
           <button
