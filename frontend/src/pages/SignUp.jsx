@@ -12,9 +12,19 @@ export default function SignUp() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    if (password !== confirmPassword) {
+      setError("As senhas não coincidem");
+      return;
+    }
+
+    setError("");
 
     try {
       await api.post("/cadastro", {
@@ -83,6 +93,7 @@ export default function SignUp() {
               type={showPassword ? "text" : "password"}
               name="inputPassword"
               ref={passwordRef}
+              onChange={(e) => setPassword(e.target.value)}
               className="border-[2px] peer border-gray-300 rounded-[4px] px-[0.8rem] py-[0.4rem] h-[2.7rem] w-full focus:outline-none focus:border-blue-500"
               placeholder="Password"
               id="inputPassword"
@@ -151,6 +162,7 @@ export default function SignUp() {
               type={showConfirmPassword ? "text" : "password"}
               name="inputConfirmPassword"
               ref={confirmPasswordRef}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               className="border-[2px] peer border-gray-300 rounded-[4px] px-[0.8rem] py-[0.4rem] h-[2.7rem] w-full focus:outline-none focus:border-blue-500"
               placeholder="Confirm Password"
               id="inputConfirmPassword"
@@ -213,6 +225,12 @@ export default function SignUp() {
               Confirm Password
             </label>
           </div>
+
+          {error && (
+            <p className="mt-[-0.5rem] text-red-600 text-[12px] font-[400] self-start tracking-[0.75px]">
+              {error}
+            </p>
+          )}
 
           <button
             type="submit"

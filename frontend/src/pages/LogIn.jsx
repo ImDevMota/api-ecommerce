@@ -7,10 +7,14 @@ export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    setError("");
 
     try {
       const { data: token } = await api.post("/login", {
@@ -24,6 +28,8 @@ export default function Login() {
       navigate("/list-users");
     } catch (err) {
       alert("Senha ou E-mail Incorretos");
+      setError("E-mail ou Senha incorretos");
+      return;
     }
   }
 
@@ -122,6 +128,12 @@ export default function Login() {
               Password
             </label>
           </div>
+
+          {error && (
+            <p className="mt-[-0.5rem] text-red-600 text-[12px] font-[400] self-start tracking-[0.75px]">
+              {error}
+            </p>
+          )}
 
           <button
             type="submit"
